@@ -31,7 +31,27 @@ export class TodosService {
     return this.todosRepository.save(newTodo)
   }
 
-  update(updateTodoDto: UpdateTodoDto, userId: number) {}
+  async update(updateTodoDto: UpdateTodoDto, userId: number) {
+    await this.todosRepository.update({
+      id: updateTodoDto.id,
+      user: {
+        id: userId
+      }
+    }, {
+      doneStatus: updateTodoDto.doneStatus
+    })
 
-  delete(deleteTodo: DeleteTodoDto, userId: number) {}
+    return { message: "Succesfully updated" }
+  }
+
+  async delete(deleteTodoDto: DeleteTodoDto, userId: number) {
+    await this.todosRepository.delete({
+      id: deleteTodoDto.id,
+      user: {
+        id: userId
+      }
+    })
+
+    return { message: "Succesfully deleted" }
+  }
 }

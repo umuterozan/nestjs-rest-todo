@@ -1,4 +1,11 @@
+import { IsBoolean, IsNotEmpty, IsNumber } from "class-validator";
+
 export class UpdateTodoDto {
-  content: string;
+  @IsNotEmpty()
+  @IsNumber()
+  id: number;
+
+  @IsNotEmpty()
+  @IsBoolean()
   doneStatus: boolean;
 }

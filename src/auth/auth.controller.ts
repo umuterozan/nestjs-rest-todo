@@ -16,6 +16,10 @@ export class AuthController {
 
   @Post("signup")
   async signUp(@Body() dto: AuthDto) {
-    return await this.authService.signUp(dto)
+    try {
+      await this.authService.signUp(dto)
+    } catch (err) {
+      return { message: err.detail }
+    }
   }
 }
